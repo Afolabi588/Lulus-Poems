@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lulu's Poems</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .hidden {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-left: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        main {
+            margin: 100px auto;
+            max-width: 700px;
+        }
+
+        .poem {
+            background: #ffffff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #0056b3;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: left;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .like-btn, .comment-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .like-btn {
+            color: #999;
+        }
+
+        .like-btn.liked {
+            color: #e63946;
+        }
+
+        .comment-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            width: 300px;
+            text-align: left;
+        }
+
+        .comment-box textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .comment-box button {
+            margin-top: 5px;
+            background: #0056b3;
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #777;
+        }
+
+        footer {
+            background: #222;
+            color: #fff;
+            padding: 3px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>Lulu's Poems</h1>
+    </header>
+    <main>
+        <section class="poem">
+            <h2>The Silent Moon</h2>
+            <p>
+                Whispers dance upon the silver light,<br>
+                Secrets woven in the fabric of night.<br>
+                A lonely moon in a sky so vast,<br>
+                Holding stories of a forgotten past.
+            </p>
+            <div class="actions">
+                <button class="like-btn" onclick="toggleLike(this)">♡</button>
+                <button class="comment-btn" onclick="openComments()">💬</button>
+            </div>
+        </section>
+        
+        <section class="poem">
+            <h2>Echoes of Time</h2>
+            <p>
+                A ticking clock, a fading sound,<br>
+                Echoes lost, yet never found.<br>
+                Moments drifting, like dust in air,<br>
+                Slipping through hands, unaware.
+            </p>
+            <div class="actions">
+                <button class="like-btn" onclick="toggleLike(this)">♡</button>
+                <button class="comment-btn" onclick="openComments()">💬</button>
+            </div>
+        </section>
+    </main>
+
+    <div class="comment-box" id="commentBox">
+        <span class="close-btn" onclick="closeComments()">✖</span>
+        <h3>Comments</h3>
+        <textarea placeholder="Add a comment..."></textarea>
+        <button>Post Comment</button>
+    </div>
+
+    <footer>
+        <p>Follow Lulu's Poems on <a href="https://www.instagram.com/prettyy.lulu/" target="_blank">Instagram</a></p>
+    </footer>
+
+    <script>
+        function toggleLike(button) {
+            if (button.classList.contains("liked")) {
+                button.classList.remove("liked");
+                button.innerHTML = "♡";
+            } else {
+                button.classList.add("liked");
+                button.innerHTML = "❤️";
+            }
+        }
+
+        function openComments() {
+            document.getElementById("commentBox").style.display = "block";
+        }
+
+        function closeComments() {
+            document.getElementById("commentBox").style.display = "none";
+        }
+
+        let lastScrollTop = 0;
+    window.addEventListener("scroll", function () {
+        let currentScroll = window.scrollY;
+        let header = document.querySelector("header");
+
+        if (currentScroll > lastScrollTop) {
+            header.classList.add("hidden");
+        } else {
+            header.classList.remove("hidden");
+        }
+        lastScrollTop = currentScroll;
+    });
+    </script>
+</body>
+</html>
